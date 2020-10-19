@@ -5,9 +5,10 @@ public class hangmanmain
 	public static void main(String [] args)
 	{
 		Scanner in = new Scanner(System.in);
-		Console hide = System.console();
-		char [] word_array = hide.readPassword("Enter a word: "); //the word you're meant to guess
-		String word = new String(word_array);
+		//Console hide = System.console();
+		//char [] word_array = hide.readPassword("Enter a word: "); //the word you're meant to guess
+		String word = "dog"; 
+		char[] word_array = word.toCharArray();
 		int unique_letters = uniqueLetters(word_array);
 		int guesses_amount_allowed = 5 + unique_letters; //6 wrong guesses are allowed
 		char [] guesses_array = new char[guesses_amount_allowed]; //a string of all guesses
@@ -23,7 +24,7 @@ public class hangmanmain
 			System.out.println("Guess a letter:");
 			guesses_array[letter_count] = in.next().charAt(0); //if you type in more than 1 letter, it will just accept the first, improve later?
 			letter_count++;
-			if (letters_discovered == showLetters(word,guesses_array)) // was the last guess correct?
+			if (letters_discovered != showLetters(word,guesses_array)) // was the last guess correct?
 				correct_guesses ++;
 			else
 				wrong_guesses ++;
@@ -40,7 +41,7 @@ public class hangmanmain
 		for(int i = 0; i < word.length(); i++)
 		{
 			int j = 0;
-			while(j < guesses.length&&!(word.charAt(i)==guesses[i]))
+			while(j < guesses.length&&!(word.charAt(i)==guesses[j]))
 				j++;
 			if(j == guesses.length)
 				output += "_";
